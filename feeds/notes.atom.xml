@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Rohith's - Notes</title><link href="https://rohithreddy.github.io/" rel="alternate"></link><link href="https://rohithreddy.github.io/feeds/notes.atom.xml" rel="self"></link><id>https://rohithreddy.github.io/</id><updated>2020-04-03T18:00:00+05:30</updated><entry><title>Git Notes</title><link href="https://rohithreddy.github.io/2020/04/Git%20notes.html" rel="alternate"></link><published>2020-04-03T18:00:00+05:30</published><updated>2020-04-03T18:00:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2020-04-03:/2020/04/Git notes.html</id><summary type="html">&lt;p&gt;just so I remember&lt;/p&gt;</summary><content type="html">&lt;h3&gt;show fetch and push url details for origin&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git remote show origin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Set remote url to a different address&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git remote set-url origin &lt;span class="o"&gt;{&lt;/span&gt;new_url&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Notes"></category><category term="notes"></category><category term="git"></category><category term="tips"></category></entry><entry><title>Zathura PDF Reader</title><link href="https://rohithreddy.github.io/2020/04/Zathura.html" rel="alternate"></link><published>2020-04-01T18:00:00+05:30</published><updated>2020-04-01T18:00:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2020-04-01:/2020/04/Zathura.html</id><summary type="html">&lt;p&gt;Zathura, a simple functional pdf viewer&lt;/p&gt;</summary><content type="html">&lt;p&gt;Zathura is a simple, functional PDF viewer thats highly customizable, below are some common shortcuts / tips &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;page&lt;/span&gt; &lt;span class="nv"&gt;fit&lt;/span&gt; 
+&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;fit&lt;/span&gt; &lt;span class="nv"&gt;width&lt;/span&gt;
+&lt;span class="nv"&gt;r&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;rotate&lt;/span&gt; &lt;span class="nv"&gt;pages&lt;/span&gt; 
+&lt;span class="nv"&gt;d&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;side&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;by&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;side&lt;/span&gt; &lt;span class="nv"&gt;mode&lt;/span&gt; 
+&lt;span class="nv"&gt;Ctrl&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;r&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Invert&lt;/span&gt; &lt;span class="nv"&gt;Colors&lt;/span&gt; 
+&lt;span class="nv"&gt;Tab&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="nv"&gt;index&lt;/span&gt; 
+&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;follow&lt;/span&gt; &lt;span class="nv"&gt;links&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;along with above most of the vi's key bindings for movement / scrolling work, look at the &lt;a href="https://man.cx/zathura(1)"&gt;Zathura man page&lt;/a&gt; for more keybindings&lt;/p&gt;
+&lt;p&gt;References &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://wiki.archlinux.org/index.php/zathura"&gt;Zathura Arch wiki page&lt;/a&gt;
+&lt;br/&gt;
+&lt;a href="https://pwmt.org/projects/zathura/documentation/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content><category term="Notes"></category><category term="notes"></category><category term="zathura"></category><category term="pdf"></category><category term="tips"></category></entry></feed>
