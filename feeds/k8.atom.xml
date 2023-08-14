@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Rohith's - k8</title><link href="https://rohithreddy.github.io/" rel="alternate"></link><link href="https://rohithreddy.github.io/feeds/k8.atom.xml" rel="self"></link><id>https://rohithreddy.github.io/</id><updated>2023-05-01T00:14:00+05:30</updated><entry><title>Creating a K8S Cluster with microk8s</title><link href="https://rohithreddy.github.io/2023/05/creating-a-k8s-cluster-with-microk8s.html" rel="alternate"></link><published>2023-05-01T00:14:00+05:30</published><updated>2023-05-01T00:14:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2023-05-01:/2023/05/creating-a-k8s-cluster-with-microk8s.html</id><summary type="html">&lt;p&gt;How to create a K8s cluster with microk8s&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Creating a MicroK8s Cluster and Adding a Node&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cluster Setup:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;nfs-common&lt;span class="w"&gt; &lt;/span&gt;-y
+sudo&lt;span class="w"&gt; &lt;/span&gt;snap&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;usermod&lt;span class="w"&gt; &lt;/span&gt;-a&lt;span class="w"&gt; &lt;/span&gt;-G&lt;span class="w"&gt; &lt;/span&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;su&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;
+microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
+microk8s.disable&lt;span class="w"&gt; &lt;/span&gt;ha-cluster
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Configure MicroK8s:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;/var/snap/microk8s/current/args
+sudo&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--allow-privileged=true&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/var/snap/microk8s/current/args/kube-apiserver
+microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
+microk8s.enable&lt;span class="w"&gt; &lt;/span&gt;dns&lt;span class="w"&gt; &lt;/span&gt;storage&lt;span class="w"&gt; &lt;/span&gt;ingress
+microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Restart MicroK8s:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s.stop
+microk8s.start
+microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Export kubeconfig:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s.config&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;~/.kube/config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Adding a Node:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install MicroK8s on new machine.&lt;/li&gt;
+&lt;li&gt;Generate join command on main node:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;add-node
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Execute join command on new node:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;join&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;main_node_ip&amp;gt;:25000/&amp;lt;token&amp;gt;/&amp;lt;hash&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;--worker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Enhance Convenience:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enable MicroK8s dashboard addon.&lt;/li&gt;
+&lt;li&gt;Configure &lt;code&gt;kubectl&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dashboard
+microk8s&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;~/.kube/config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;By following these steps, you'll swiftly create a MicroK8s cluster, add a new node, and optimize your setup for efficient management.&lt;/p&gt;</content><category term="k8"></category><category term="k8s"></category><category term="microk8"></category></entry></feed>
