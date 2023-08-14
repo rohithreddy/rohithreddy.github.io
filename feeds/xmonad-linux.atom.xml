@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Rohith's - xmonad, linux</title><link href="https://rohithreddy.github.io/" rel="alternate"></link><link href="https://rohithreddy.github.io/feeds/xmonad-linux.atom.xml" rel="self"></link><id>https://rohithreddy.github.io/</id><updated>2021-05-04T00:14:00+05:30</updated><entry><title>Mate + Xmonad | Ideal Setup</title><link href="https://rohithreddy.github.io/2021/05/mate-xmonad-ideal-setup.html" rel="alternate"></link><published>2021-05-04T00:14:00+05:30</published><updated>2021-05-04T00:14:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2021-05-04:/2021/05/mate-xmonad-ideal-setup.html</id><summary type="html">&lt;p&gt;How to set up Xmonad with Mate&lt;/p&gt;</summary><content type="html">&lt;p&gt;Xmonad is one of the best Tiling window manager out there. Integrating it with Mate Desktop Environment is a wonderful combination&lt;/p&gt;
+&lt;p&gt;Install any distro with Mate DE, install xmonad and xmonad-contrib packages from the package manager &lt;/p&gt;
+&lt;p&gt;Create xmonad.hs configuration file in ~/.xmonad folder &lt;/p&gt;
+&lt;p&gt;use minimal configuration or use my configration from https://github.com/rohithreddy/xmonadconfig&lt;/p&gt;
+&lt;p&gt;clone and copy this files to ~/.xmonad folder&lt;/p&gt;
+&lt;p&gt;compile the configuration &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;xmonad&lt;span class="w"&gt; &lt;/span&gt;--recompile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a new entry in Mate's Startup Applications with &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;xmonad&lt;span class="w"&gt; &lt;/span&gt;--replace
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Log out and log back into Mate&lt;/p&gt;</content><category term="xmonad, linux"></category><category term="linux"></category><category term="xmonad"></category></entry></feed>
