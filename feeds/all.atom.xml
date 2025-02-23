@@ -1,62 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Rohith's</title><link href="https://rohithreddy.github.io/" rel="alternate"></link><link href="https://rohithreddy.github.io/feeds/all.atom.xml" rel="self"></link><id>https://rohithreddy.github.io/</id><updated>2023-08-14T09:37:00+05:30</updated><entry><title>Creating a K8S Cluster with microk8s</title><link href="https://rohithreddy.github.io/2023/08/creating-a-k8s-cluster-with-microk8s.html" rel="alternate"></link><published>2023-08-14T09:37:00+05:30</published><updated>2023-08-14T09:37:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2023-08-14:/2023/08/creating-a-k8s-cluster-with-microk8s.html</id><summary type="html">&lt;p&gt;How to create a K8s cluster with microk8s&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Creating a MicroK8s Cluster and Adding a Node&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Cluster Setup:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;nfs-common&lt;span class="w"&gt; &lt;/span&gt;-y
-sudo&lt;span class="w"&gt; &lt;/span&gt;snap&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;
-sudo&lt;span class="w"&gt; &lt;/span&gt;usermod&lt;span class="w"&gt; &lt;/span&gt;-a&lt;span class="w"&gt; &lt;/span&gt;-G&lt;span class="w"&gt; &lt;/span&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;
-sudo&lt;span class="w"&gt; &lt;/span&gt;su&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;
-microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
-microk8s.disable&lt;span class="w"&gt; &lt;/span&gt;ha-cluster
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Configure MicroK8s:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;/var/snap/microk8s/current/args
-sudo&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--allow-privileged=true&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/var/snap/microk8s/current/args/kube-apiserver
-microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
-microk8s.enable&lt;span class="w"&gt; &lt;/span&gt;dns&lt;span class="w"&gt; &lt;/span&gt;storage&lt;span class="w"&gt; &lt;/span&gt;ingress
-microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Restart MicroK8s:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s.stop
-microk8s.start
-microk8s.status&lt;span class="w"&gt; &lt;/span&gt;--wait-ready
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Export kubeconfig:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s.config&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;~/.kube/config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Adding a Node:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Install MicroK8s on new machine.&lt;/li&gt;
-&lt;li&gt;Generate join command on main node:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;add-node
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Execute join command on new node:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;join&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;main_node_ip&amp;gt;:25000/&amp;lt;token&amp;gt;/&amp;lt;hash&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;--worker
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Enhance Convenience:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Enable MicroK8s dashboard addon.&lt;/li&gt;
-&lt;li&gt;Configure &lt;code&gt;kubectl&lt;/code&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;microk8s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dashboard
-microk8s&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;~/.kube/config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;By following these steps, you'll swiftly create a MicroK8s cluster, add a new node, and optimize your setup for efficient management.&lt;/p&gt;</content><category term="k8"></category><category term="k8s"></category><category term="microk8"></category></entry><entry><title>Hola World Again</title><link href="https://rohithreddy.github.io/2023/05/hola-world-again.html" rel="alternate"></link><published>2023-05-01T00:14:00+05:30</published><updated>2023-05-01T00:14:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2023-05-01:/2023/05/hola-world-again.html</id><summary type="html">&lt;p&gt;Changes ||| Flux&lt;/p&gt;</summary><content type="html">&lt;p&gt;Has been a while since I last wrote, had embarked on many a journeys along the way. The world has been taken over by ChatGPT-4 / Midjourney / Hugging Face, AI / ML has maken much mainstream attention. We are starting to use them for every possible use case and there is a new economy being create right now, and the early movers have a clear advantage as usual so jump in, create something, playaround, have fun building.  &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Rohith's</title><link href="https://rohithreddy.github.io/" rel="alternate"></link><link href="https://rohithreddy.github.io/feeds/all.atom.xml" rel="self"></link><id>https://rohithreddy.github.io/</id><updated>2025-02-22T11:11:00+05:30</updated><entry><title>Reboot N.0</title><link href="https://rohithreddy.github.io/2025/02/11111.html" rel="alternate"></link><published>2025-02-22T11:11:00+05:30</published><updated>2025-02-22T11:11:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2025-02-22:/2025/02/11111.html</id><summary type="html">&lt;p&gt;I am always coding&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have been a couple of years since I have blogged or worked full-time as an employee. &lt;/p&gt;
+&lt;p&gt;They say time flies, yes it does and sometimes almost years seem to fly by faster than days, perhaps hours, probably this is just my perception of time.&lt;/p&gt;
+&lt;p&gt;Since the last time I ranted on the internet, lot of things have changed with me and the world nonethless I am still unemployed and I am still dreaming of building things or atleast forking smaller projects / products. &lt;/p&gt;
+&lt;p&gt;But atleast I was alive and I am sure I tried to code or atleast opened my computer on most days, being an optimist, I am satisfied a bit that I was active throughout the chaos, met my twinflame and shared the best 2 1/2 months of my life with her. During the intense phases of my life once in a while there would be days that each could be made into movies, other slow phases would last couple of years at times with nothing but being indoors, trying to make a living or cyber loafing around the internet opening more tabs than I could close. My be this is connecting with the chaotic part of me looking to ingest random information. I did not know when I turned into this ADHD creature who spent most of the time moving from one tab to other among the thousand open tabs, trying to organise &amp;amp; close the tabs.&lt;/p&gt;
+&lt;p&gt;In a way I have turned into this randomness engine sucking in time. &lt;/p&gt;
+&lt;p&gt;Always busy trying to do something, but never completing or even start to work on something significant. &lt;/p&gt;
+&lt;p&gt;In a way weirdly, most of my close friends are in a way stuck to this pattern, most of us are not using our real potential, not even an ounce of that potential we have spent, not sure if this is the law of attraction or may be some of us have a common journey. &lt;/p&gt;
+&lt;p&gt;May be we will wake up one day to do things that might matter. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I need a direction, I need a goal.&lt;/strong&gt;
+&lt;strong&gt;I need to be persistent.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;May be I need the repetition. &lt;/p&gt;
+&lt;p&gt;Even the ants build such huge colonies cause they consistently drill in the same direction.&lt;/p&gt;
+&lt;p&gt;Amidst this sad rambling, I still have fun, I love the Chaos, the Ups and Downs and the strange charms on this one hell of a roller coaster ride. &lt;/p&gt;
+&lt;p&gt;May be I am just one thought away from not being sane, or past it. I am enjoying the ultimate ride on this Third Rock from the SUN. &lt;/p&gt;
+&lt;p&gt;I am sure of one thing, tomorrow is full of possibilities and here is one of my favourite quotes.  &lt;strong&gt;YOLO&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;You are a ghost driving a meat caoted skeleton made from stardust, riding a rock, hurtling through space. FEAR NOTHING !&lt;/strong&gt; &lt;/p&gt;</content><category term="reboot"></category><category term="reboot"></category></entry><entry><title>Hola World Again</title><link href="https://rohithreddy.github.io/2023/05/hola-world-again.html" rel="alternate"></link><published>2023-05-01T00:14:00+05:30</published><updated>2023-05-01T00:14:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2023-05-01:/2023/05/hola-world-again.html</id><summary type="html">&lt;p&gt;Changes ||| Flux&lt;/p&gt;</summary><content type="html">&lt;p&gt;Has been a while since I last wrote, had embarked on many a journeys along the way. The world has been taken over by ChatGPT-4 / Midjourney / Hugging Face, AI / ML has maken much mainstream attention. We are starting to use them for every possible use case and there is a new economy being create right now, and the early movers have a clear advantage as usual so jump in, create something, playaround, have fun building.  &lt;/p&gt;
 &lt;p&gt;PS: this is a note from my past self :D&lt;/p&gt;</content><category term="words"></category><category term="just_words"></category></entry><entry><title>Mate + Xmonad | Ideal Setup</title><link href="https://rohithreddy.github.io/2021/05/mate-xmonad-ideal-setup.html" rel="alternate"></link><published>2021-05-04T00:14:00+05:30</published><updated>2021-05-04T00:14:00+05:30</updated><author><name>Rohith Reddy</name></author><id>tag:rohithreddy.github.io,2021-05-04:/2021/05/mate-xmonad-ideal-setup.html</id><summary type="html">&lt;p&gt;How to set up Xmonad with Mate&lt;/p&gt;</summary><content type="html">&lt;p&gt;Xmonad is one of the best Tiling window manager out there. Integrating it with Mate Desktop Environment is a wonderful combination&lt;/p&gt;
 &lt;p&gt;Install any distro with Mate DE, install xmonad and xmonad-contrib packages from the package manager &lt;/p&gt;
 &lt;p&gt;Create xmonad.hs configuration file in ~/.xmonad folder &lt;/p&gt;
